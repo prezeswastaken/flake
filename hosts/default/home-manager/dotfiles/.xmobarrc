@@ -1,0 +1,23 @@
+Config { font = "FiraCode Nerd Font 18"
+       , bgColor = "#363a4f"
+       , fgColor = "#cad3f5"
+       , alpha = 100
+       , position = TopHM 40 80 80 10 10
+       , allDesktops = True
+       , additionalFonts = ["xft:Monoki Nerd Font:pixelsize=18:antialias=true:hinting=true"]
+       , commands = [ Run Cpu [ "-t", "\xf4bc <total>%", "-L","3","-H","50","--normal","#d0d0d0","--high","#ff0000"] 10
+                    , Run Memory [ "-t", "\xf233 <used>G (<usedratio>%)", "-d", "1", "--", "--scale", "1024"] 20
+                    , Run Date "\xf133 %a %b %_d %Y " "date" 10
+                    , Run Date "\xf017 %H:%M:%S" "clock" 10
+                    , Run DiskU [("/", "\xf0a23 <used>/<size>"), ("/dev/nvme0n1p3", "<usedbar>")]
+                            ["-L", "20", "-H", "50", "-m", "1", "-p", "3"]
+                            20
+                    , Run Volume "default" "Master" ["-t", "\xf057e <volume>%"] 10
+                    , Run Uptime ["-t", "\xf199f <hours> <minutes>", "-S", "True"] 10
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "  <fc=#8bd5ca>%cpu%</fc>  <fc=#eed49f>%memory%</fc>  <fc=#f5a97f>%disku%</fc>  <fc=#8aadf4>%uptime%</fc>}<fc=#ee99a0>%date%</fc> {%StdinReader% %default:Master%  <fc=#c6a0f6>%clock%</fc>  "
+       }
+
